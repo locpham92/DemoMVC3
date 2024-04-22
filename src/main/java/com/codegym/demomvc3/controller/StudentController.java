@@ -4,8 +4,8 @@ import com.codegym.demomvc3.model.Student;
 import com.codegym.demomvc3.service.IService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -24,6 +24,25 @@ public class StudentController {
         modelAndView.addObject("list",list);
         return modelAndView;
     }
+    @GetMapping("/search")
+    public ModelAndView searchStudent(@RequestParam String nameSearch) {
+        ModelAndView modelAndView = new ModelAndView("home");
+        return modelAndView;
+    }
+
+    @GetMapping("/add")
+    public ModelAndView showFormAdd() {
+        ModelAndView modelAndView = new ModelAndView("add");
+        Student student = new Student();
+        modelAndView.addObject("student",student);
+        return modelAndView;
+    }
+    @PostMapping("/add")
+    public String addStudent(@ModelAttribute Student student) {
+        this.studentIService.add(student);
+        return "redirect:/students/";
+    }
+
     @GetMapping("/hello")
     public ModelAndView showHello() {
     ModelAndView model = new ModelAndView("hello");
@@ -31,5 +50,10 @@ public class StudentController {
     return model;
     }
 
+    @GetMapping("/edit/{id}")
+    public ModelAndView editStudent(@PathVariable int id) {
+        ModelAndView modelAndView = new ModelAndView("edit");
+        return modelAndView;
+    }
 
 }

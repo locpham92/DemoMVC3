@@ -12,7 +12,11 @@
     <title>HOME</title>
 </head>
 <body>
-
+<a href="/students/add">ADD STUDENT</a>
+<form action="" method="get">
+    <input type="text" name="nameSearch" placeholder="Enter">
+    <button type="submit">Search</button>
+</form>
 <table border="1">
     <tr>
         <td>Id</td>
